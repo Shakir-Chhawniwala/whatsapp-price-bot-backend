@@ -1,15 +1,19 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const { MessagingResponse } = require('twilio').twiml;
-const { comparePrices } = require('./priceChecker');
+const { comparePrices } = require('./comparePrices');
 
 const app = express();
-app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/whatsapp', async (req, res) => {
-  const incomingMsg = req.body.Body;
+  console.log(req);
+  
+  const incomingMsg = req.body.body;
   const twiml = new MessagingResponse();
-
+  console.log(incomingMsg);
+  
   const reply = await comparePrices(incomingMsg); // e.g. "iPhone 14"
   twiml.message(reply);
 
