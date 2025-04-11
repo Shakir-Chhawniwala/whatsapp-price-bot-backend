@@ -7,6 +7,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
 app.post('/whatsapp', async (req, res) => {
   console.log(req);
   
