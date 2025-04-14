@@ -18,3 +18,13 @@ async function sendPriceDropAlert(product) {
 }
 
 module.exports = { sendPriceDropAlert };
+
+async function sendMessage(to, body) {
+  return client.messages.create({
+    from: process.env.TWILIO_WHATSAPP_FROM,
+    to,
+    body,
+  });
+}
+
+module.exports = { sendMessage };
